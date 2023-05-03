@@ -50,10 +50,11 @@ export class MapComponent implements OnInit, OnDestroy {
     // });
     this.customIcon = L.icon({
       iconUrl: 'assets/marker-purple.png',
-      iconSize: [10, 20], // Set the dimensions of your icon here
-      iconAnchor: [22, 94], // Set the anchor point of your icon here
-      popupAnchor: [-3, -76] // Set the popup anchor point here
+      iconSize: [10, 25], // Adjust the dimensions of your icon here, for example, halving the original dimensions
+      iconAnchor: [5, 25], // Adjust the anchor point of your icon here, for example, halving the original anchor points
+      popupAnchor: [0, -25] // Adjust the popup anchor point here, for example, halving the original popup anchor points
   });
+  
   
     
 
