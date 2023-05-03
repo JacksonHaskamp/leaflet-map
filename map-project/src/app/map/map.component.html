@@ -1,1 +1,7 @@
 <div id="map" style="width: 100%; height: 500px;"></div>
+
+<select (change)="changeIconSize($event)">
+    <option *ngFor="let size of iconSizes; let i = index" [value]="i">{{ size[0] }}x{{ size[1] }}</option>
+  </select>
+  
+  

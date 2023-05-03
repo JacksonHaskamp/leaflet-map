@@ -3,17 +3,22 @@ import { MarkerService } from '../marker.service';
 import * as L from 'leaflet';
 import 'leaflet.awesome-markers';
 
-
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
 })
 export class MapComponent implements OnInit, OnDestroy {
-  
   map: L.Map | undefined;
   markersLayer: L.LayerGroup | undefined;
   customIcon: L.Icon | undefined;
+
+  iconSizes: [number, number][] = [
+    [10, 25],
+    [20, 50],
+    [30, 75],
+  ];
+  selectedIconSize: [number, number] = this.iconSizes[0];
 
   constructor(private markerService: MarkerService) {}
 
@@ -42,21 +47,12 @@ export class MapComponent implements OnInit, OnDestroy {
       accessToken: 'pk.eyJ1IjoidmVydGliZWF0IiwiYSI6ImNsaDg5dGE4dDA0OWYzbXM5ZDRnam02N2MifQ.itLsS7uETccoCPvw2fryQw'
     }).addTo(this.map);
 
-    // this.customIcon = L.AwesomeMarkers.icon({
-    //   icon: 'star',
-    //   prefix: 'pf',
-    //   markerColor: 'purple',
-    //   iconUrl: 'assets/marker-purple.png'
-    // });
     this.customIcon = L.icon({
       iconUrl: 'assets/marker-purple.png',
-      iconSize: [10, 25], // Adjust the dimensions of your icon here, for example, halving the original dimensions
-      iconAnchor: [5, 25], // Adjust the anchor point of your icon here, for example, halving the original anchor points
-      popupAnchor: [0, -25] // Adjust the popup anchor point here, for example, halving the original popup anchor points
-  });
-  
-  
-    
+      iconSize: this.selectedIconSize,
+      iconAnchor: [this.selectedIconSize[0] / 2, this.selectedIconSize[1]],
+      popupAnchor: [0, -this.selectedIconSize[1]],
+    });
 
     this.loadMarkers();
 
@@ -86,4 +82,17 @@ export class MapComponent implements OnInit, OnDestroy {
       });
     });
   }
+
+  changeIconSize(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    const sizeIndex = Number(target.value);
+    this.selectedIconSize = this.iconSizes[sizeIndex];
+    this.customIcon = L.icon({
+      iconUrl: 'assets/marker-purple.png',
+      iconSize: this.selectedIconSize,
+      iconAnchor: [this.selectedIconSize[0] / 2, this.selectedIconSize[1]],
+      popupAnchor: [0, -this.selectedIconSize[1]],
+    });
+  }
+  
 }
