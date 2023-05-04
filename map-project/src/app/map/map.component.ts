@@ -14,9 +14,9 @@ export class MapComponent implements OnInit, OnDestroy {
   customIcon: L.Icon | undefined;
 
   iconSizes: [number, number][] = [
-    [10, 25],
-    [20, 50],
-    [30, 75],
+    [16, 16],
+    [30, 30],
+    [40, 40],
   ];
   selectedIconSize: [number, number] = this.iconSizes[0];
 
