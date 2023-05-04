@@ -1,3 +1,18 @@
-<div id="box">
-    <p>marker-list works!</p>
-</div>
+<ul>
+    <li *ngFor="let marker of markers" (click)="selectMarker(marker)">
+      {{ marker.name }}
+    </li>
+  </ul>
+  
+  <div *ngIf="selectedMarker">
+    <form>
+      <label for="name">Name:</label>
+      <input id="name" [(ngModel)]="selectedMarker.name" name="name" />
+  
+      <label for="description">Description:</label>
+      <input id="description" [(ngModel)]="selectedMarker.description" name="description" />
+  
+      <button (click)="saveChanges()">Save</button>
+    </form>
+  </div>
+  
