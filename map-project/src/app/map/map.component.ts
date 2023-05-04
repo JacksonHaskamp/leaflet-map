@@ -74,7 +74,7 @@ export class MapComponent implements OnInit, OnDestroy {
       
 
       this.markerService.createMarker(markerData).subscribe((newMarker: any) => {
-        marker.bindPopup(`<b>\${newMarker.name}</b><br>\${newMarker.description}`);
+        marker.bindPopup("<b>" + newMarker.name + "</b><br>" + newMarker.description);
       });
     });
   }
@@ -91,7 +91,7 @@ export class MapComponent implements OnInit, OnDestroy {
         });
 
         const marker = L.marker([markerData.position.lat, markerData.position.lng], { icon: customIconWithSize }).addTo(this.markersLayer!);
-        marker.bindPopup(`<b>\${markerData.name}</b><br>\${markerData.description}`);
+        marker.bindPopup("<b>" + markerData.name + "</b><br>" + markerData.description);
       });
     });
   }
