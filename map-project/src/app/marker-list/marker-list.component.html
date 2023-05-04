@@ -13,6 +13,8 @@
       <input id="description" [(ngModel)]="selectedMarker.description" name="description" />
   
       <button (click)="saveChanges()">Save</button>
+      <button (click)="deleteMarker(selectedMarker._id)">Delete Marker</button>
+
     </form>
   </div>
   

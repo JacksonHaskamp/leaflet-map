@@ -33,4 +33,17 @@ export class MarkerListComponent implements OnInit {
       this.selectedMarker = null;
     });
   }
+  deleteMarker(id: string) {
+    this.markerService.deleteMarker(id).subscribe(
+      () => {
+        console.log('Delete successful');
+        // Remove the marker from the local list and update the view
+        this.markers = this.markers.filter(marker => marker._id !== id);
+      },
+      error => {
+        console.error('There was an error!', error);
+      }
+    );
+  }
+  
 }

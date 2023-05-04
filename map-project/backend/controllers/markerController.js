@@ -39,3 +39,20 @@ exports.updateMarker = async (req, res) => {
 };
 
 
+exports.deleteMarker = async (req, res) => {
+  try {
+    const markerId = req.params.id;
+    const deletedMarker = await Marker.findByIdAndDelete(markerId);
+
+    if (!deletedMarker) {
+      return res.status(404).json({ message: 'Marker not found' });
+    }
+
+    res.json({ message: 'Marker deleted successfully', data: deletedMarker });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
+  }
+};
+
+
+

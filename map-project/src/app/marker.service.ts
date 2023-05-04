@@ -23,6 +23,13 @@ export class MarkerService {
     return this.http.put('http://localhost:3000/markers/' + id, marker);
   }
   
+  deleteMarker(id: string) {
+    console.log(id);
+    return this.http.delete('http://localhost:3000/markers/' + id);
+  }
+  
+  
+  
   
 
 }
