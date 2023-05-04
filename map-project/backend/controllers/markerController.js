@@ -14,6 +14,7 @@ exports.createMarker = async (req, res) => {
     name: req.body.name,
     description: req.body.description,
     position: req.body.position,
+    iconSize: req.body.iconSize,
   });
 
   try {

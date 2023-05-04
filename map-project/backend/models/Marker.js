@@ -19,6 +19,15 @@ const markerSchema = new mongoose.Schema({
       required: true,
     },
   },
+  iconSize: {
+    type: [Number],
+    required: true,
+    validate: [arrayLimit, 'Icon size array should have exactly 2 elements.'],
+  },
 });
+
+function arrayLimit(val) {
+  return val.length === 2;
+}
 
 module.exports = mongoose.model('Marker', markerSchema);

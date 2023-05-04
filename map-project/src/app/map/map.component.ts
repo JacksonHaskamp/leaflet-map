@@ -66,7 +66,9 @@ export class MapComponent implements OnInit, OnDestroy {
           lat: e.latlng.lat,
           lng: e.latlng.lng,
         },
+        iconSize: this.selectedIconSize, // Add this line
       };
+      
 
       this.markerService.createMarker(markerData).subscribe((newMarker: any) => {
         marker.bindPopup(`<b>\${newMarker.name}</b><br>\${newMarker.description}`);
@@ -77,7 +79,15 @@ export class MapComponent implements OnInit, OnDestroy {
   loadMarkers() {
     this.markerService.getMarkers().subscribe((markers: any) => {
       markers.forEach((markerData: any) => {
-        const marker = L.marker([markerData.position.lat, markerData.position.lng], { icon: this.customIcon }).addTo(this.markersLayer!);
+        const iconSize = markerData.iconSize ? (markerData.iconSize as L.PointTuple) : [25, 41] as L.PointTuple;
+        const customIconWithSize = L.icon({
+          iconUrl: 'assets/marker-purple.png',
+          iconSize,
+          iconAnchor: [iconSize[0] / 2, iconSize[1]],
+          popupAnchor: [0, -iconSize[1]],
+        });
+
+        const marker = L.marker([markerData.position.lat, markerData.position.lng], { icon: customIconWithSize }).addTo(this.markersLayer!);
         marker.bindPopup(`<b>\${markerData.name}</b><br>\${markerData.description}`);
       });
     });
