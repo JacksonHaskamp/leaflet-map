@@ -24,6 +24,9 @@ export class MapComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.initMap();
+    this.markerService.markerCreated.subscribe(() => {
+      this.loadMarkers();
+    });
   }
 
   ngOnDestroy() {

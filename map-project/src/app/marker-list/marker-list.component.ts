@@ -14,6 +14,9 @@ export class MarkerListComponent implements OnInit {
 
   ngOnInit() {
     this.loadMarkers();
+    this.markerService.markerCreated.subscribe(() => {
+      this.loadMarkers();
+    });
   }
 
   loadMarkers() {
